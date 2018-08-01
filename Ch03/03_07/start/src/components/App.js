@@ -1,7 +1,7 @@
 import { Component } from "react"
-import {SkiDayList} from "./SkiDayList"
-import {SkiDayCount} from "./SkiDayCount"
-
+import { SkiDayList } from "./SkiDayList"
+import { SkiDayCount } from "./SkiDayCount"
+import { AddDayForm } from "./AddDayForm"
 
 export class App extends Component {
     constructor(props){
@@ -38,18 +38,21 @@ export class App extends Component {
     render(){
         return(
             <div className="app">
-                <SkiDayList days={this.state.allSkiDays}/>
-                <SkiDayCount total={this.countDays()}
-                             powder={this.countDays(
-                                 "powder"
-                             )}
-                             backcountry={this.countDays(
-                                 "backcountry"
-                             )}
-                             goal={this.countDays(
-                                 "goal"
-                             )}
-                />
+                {(this.props.location.pathname === "/") ?
+                    <SkiDayCount total={this.countDays()}
+                                 powder={this.countDays(
+                                     "powder"
+                                 )}
+                                 backcountry={this.countDays(
+                                     "backcountry"
+                                 )}
+                                 goal={this.countDays(
+                                     "goal"
+                                 )}/> :
+                    (this.props.location.pathname === "/add-day") ?
+                        <AddDayForm /> :
+                        <SkiDayList days={this.state.allSkiDays}/>
+                }
             </div>
         )
     }
