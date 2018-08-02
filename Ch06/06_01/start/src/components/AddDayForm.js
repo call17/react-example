@@ -1,4 +1,43 @@
-import { PropTypes } from 'react'
+import { PropTypes, Component } from 'react'
+
+const tahoeResorts = [
+    "Alpine Meadows",
+    "Boreal",
+    "Diamond Peak",
+    "Donner Ski Ranch",
+    "Heavenly",
+    "Homewood",
+    "Kirkwood",
+    "Mt. Rose",
+    "Northstar",
+    "Squaw Valley",
+    "Sugar Bowl"
+]
+
+class AutoComplete extends Component{
+    getValue(){
+        return this.refs.inputResort.value
+    }
+    setValue(inputValue){
+        this.refs.inputResort.value = value
+    }
+
+    render(){
+        return(
+            <div>
+                <input type="text"
+                       list="tahoe-resorts"
+                       ref="inputResort"
+                />
+                <datalist id="tahoe-resorts">
+                    {this.props.options.map(
+                        (opt,i) => <option key={i}>{opt}</option>
+                    )}
+                </datalist>
+            </div>
+        )
+    }
+}
 
 export const AddDayForm = ({ resort, date, powder, backcountry, onNewDay }) => {
 
@@ -13,24 +52,22 @@ export const AddDayForm = ({ resort, date, powder, backcountry, onNewDay }) => {
                 backcountry: _backcountry.checked
             }
         )
-        _resort.value = " "
-        _date.value = " "
-        _powder.checked = false
-        _backcountry.checked = false
 
         console.log("resort", _resort.value)
         console.log("date", _date.value)
         console.log("powder", _powder.checked)
         console.log("backcountry", _backcountry.checked)
+
+        _resort.value = " "
+        _date.value = " "
+        _powder.checked = false
+        _backcountry.checked = false
     }
 
     return(
         <form className="add-day-form" onSubmit={submit}>
             <label htmlFor="resort">Resort name</label>
-            <input id="resort"
-                   type="text"
-                   required
-                   defaultValue={resort}
+            <AutoComplete options={tahoeResorts}
                    ref={input => _resort =  input}
             />
 
