@@ -3,14 +3,20 @@ import { Component } from 'react'
 
 export class Member extends Component {
 
+    componentWillMount(){
+        this.style ={
+        	backgroundColor: "grey"
+		}
+
+    }
 render() {
 
-	const { name, thumbnail, email, admin, makeAdmin } = this.props
+	const { name, picture, email, admin, makeAdmin } = this.props
     return (
-        <div className="member">
-        	<h1>{name} {(admin) ? <FaShield /> : null}</h1>
+        <div className="member" style={this.style}>
+        	<h1>{name.title} {name.first} {name.last} {(admin) ? <FaShield /> : null}</h1>
         	<a onClick={makeAdmin}>Make Admin</a>
-        	<img src={thumbnail} alt="profile picture" />
+        	<img src={picture.thumbnail} alt="profile picture" />
         	<p><a href={`mailto:${email}`}>{email}</a></p>
 
         </div>
