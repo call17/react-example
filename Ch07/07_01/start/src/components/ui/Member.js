@@ -3,20 +3,17 @@ import { Component } from 'react'
 
 export class Member extends Component {
 
-    constructor(props){
-        super(props)
-    }
+render() {
 
-    render() {
-        return (
-            <div className="member">
-                <h1>{this.props.name} {this.props.admin ? <FaShield/> :  null}</h1>
-                <a onClick={this.props.makeAdmin}>Make ADMIN</a>
-                <img src={this.props.thumbnail} alt="profile picture"/>
-                <p><a href={"mailto:" + this.props.email}>{this.props.email}</a></p>
-            </div>
-        )
-    }
-    }
+	const { name, thumbnail, email, admin, makeAdmin } = this.props
+    return (
+        <div className="member">
+        	<h1>{name} {(admin) ? <FaShield /> : null}</h1>
+        	<a onClick={makeAdmin}>Make Admin</a>
+        	<img src={thumbnail} alt="profile picture" />
+        	<p><a href={`mailto:${email}`}>{email}</a></p>
 
-export default Member
+        </div>
+    )
+}
+}
